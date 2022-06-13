@@ -5,21 +5,39 @@ using UnityEngine;
 public class BaseBullet : MonoBehaviour
 {
     public float speed;
+    public float lifeTime = 10;
+    private float timer;
+    public Transform parent;
     // Start is called before the first frame update
+    void Awake()
+    {
+        parent = transform.parent;
+        Debug.Log(transform.parent.name);
+    }
     void OnEnable()
     {
-        
+        timer = 0f;
+        transform.parent = null;
     }
-
+    void OnDisable()
+    {
+        transform.localPosition = Vector3.zero;
+    }
     // Update is called once per frame
     void Update()
     {
-        transform.position += (transform.forward * speed) * Time.deltaTime; 
+        transform.position += (transform.forward * speed) * Time.deltaTime;
+        timer += Time.deltaTime;
+        if (timer > lifeTime)
+        {
+            timer = 0;
+            transform.SetParent(parent);
+            gameObject.SetActive(false);
+        }
     }
     public void SetupAndShoot(Vector3 direction)
     {
         transform.rotation = Quaternion.Euler(0f, RotateBullet(direction), 0f);
-        gameObject.transform.parent = null;
         gameObject.SetActive(true);
     }
     public float RotateBullet(Vector3 direction)
