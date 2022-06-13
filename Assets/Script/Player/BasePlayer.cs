@@ -19,6 +19,7 @@ public class BasePlayer : MonoBehaviour
     }
     public void AttackPoint(Vector3 coordinateToAttack)
     {
+        if(Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
         actualWeapon.Shoot(coordinateToAttack - transform.position);
     }
     public Vector3 GetPosition()

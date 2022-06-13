@@ -772,7 +772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAggroDistance: 10
-  speed: 200
+  speed: 600
   actualWeapon: {fileID: 1464662735}
 --- !u!114 &1464662735
 MonoBehaviour:
