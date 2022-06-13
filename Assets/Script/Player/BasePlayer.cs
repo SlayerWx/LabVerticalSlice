@@ -1,15 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class BasePlayer : MonoBehaviour
 {
+    public int maxHitHP;
+    public int actuaHitlHP;
     public float maxAggroDistance;
     public float speed;
     public BasicWeapon actualWeapon;
     Rigidbody body;
+    public delegate void PlayerDead();
+    public event PlayerDead OnPlayerDead;
     void Start()
     {
+        actuaHitlHP = maxHitHP;
         body = GetComponent<Rigidbody>();
     }
     void Update()
