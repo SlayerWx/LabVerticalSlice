@@ -106,6 +106,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec5d6e13b93e51441b6f976c25e71df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 512
   speed: 20
   lifeTime: 4
+  hitDamage: 1
   parent: {fileID: 0}

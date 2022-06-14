@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class BaseBullet : MonoBehaviour
 {
+    public LayerMask targetLayer;
     public float speed;
     public float lifeTime = 10;
     private float timer;
+    public int hitDamage;
     public Transform parent;
-    // Start is called before the first frame update
+
+
+    public delegate void ColissionEnemy(Collider col,int hitDamage);
+    public static event ColissionEnemy OnCollisionEnemy;
     void Awake()
     {
         parent = transform.parent;
@@ -49,6 +54,9 @@ public class BaseBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
+        if((1 << other.gameObject.layer) == targetLayer)
+        {
+            OnCollisionEnemy?.Invoke(other, hitDamage);
+        }
     }
 }

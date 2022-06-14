@@ -21,4 +21,19 @@ public class BaseEnemy : MonoBehaviour
     {
         return transform.position;
     }
+    public void SetHitHP(int newHP)
+    {
+        actualHitHP = newHP;
+    }
+    public int GetHitHP()
+    {
+        return actualHitHP;
+    }
+    public void VerifyLife()
+    {
+        if(actualHitHP < 1)
+        {
+            Destroy(transform.gameObject);
+        }
+    }
 }
