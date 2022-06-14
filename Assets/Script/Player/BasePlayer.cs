@@ -5,7 +5,7 @@ using System;
 public class BasePlayer : MonoBehaviour
 {
     public int maxHitHP;
-    public int actuaHitlHP;
+    public int actualHitlHP;
     public float maxAggroDistance;
     public float speed;
     public BasicWeapon actualWeapon;
@@ -14,18 +14,21 @@ public class BasePlayer : MonoBehaviour
     public event PlayerDead OnPlayerDead;
     void Start()
     {
-        actuaHitlHP = maxHitHP;
+        actualHitlHP = maxHitHP;
         body = GetComponent<Rigidbody>();
     }
     void Update()
     {
-        body.velocity = new Vector3(Input.GetAxis("Horizontal") * speed * Time.deltaTime, body.velocity.y,
+
+        if(!PlayerIsDead()) 
+            body.velocity = new Vector3(Input.GetAxis("Horizontal") * speed * Time.deltaTime, body.velocity.y,
             Input.GetAxis("Vertical") * speed * Time.deltaTime);
     }
     public void AttackPoint(Vector3 coordinateToAttack)
     {
-        if(Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
-        actualWeapon.Shoot(coordinateToAttack - transform.position);
+        if (!PlayerIsDead())
+            if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
+                actualWeapon.Shoot(coordinateToAttack - transform.position);
     }
     public Vector3 GetPosition()
     {
@@ -34,5 +37,9 @@ public class BasePlayer : MonoBehaviour
     public float GetMaxAggroDistance()
     {
         return maxAggroDistance;
+    }
+    public bool PlayerIsDead()
+    {
+        return actualHitlHP <= 0;
     }
 }

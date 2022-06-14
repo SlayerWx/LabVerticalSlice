@@ -11,16 +11,10 @@ public class BaseEnemy : MonoBehaviour
     public int maxHitHP;
     int actualHitHP;
 
-    void Start()
+    public virtual void Start()
     {
         actualHitHP = maxHitHP;
         OnCountEnemy?.Invoke(1);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public Vector3 GetPosition()

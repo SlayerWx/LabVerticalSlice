@@ -11,7 +11,15 @@ public class ManagerTargetSystem : MonoBehaviour
     {
         actualTarget = enemyTest[0];
     }
+    private void OnEnable()
+    {
+        ChaserEnemy.OnSearchTargetLocation += ReturnPlayerPosition;
+    }
+    private void OnDisable()
+    {
+        ChaserEnemy.OnSearchTargetLocation -= ReturnPlayerPosition;
 
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -23,5 +31,10 @@ public class ManagerTargetSystem : MonoBehaviour
             
         }
         player.AttackPoint(actualTarget.transform.position);
+    }
+
+    Vector3 ReturnPlayerPosition()
+    {
+        return player.GetPosition();
     }
 }

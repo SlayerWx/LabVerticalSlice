@@ -12,7 +12,6 @@ public class BaseBullet : MonoBehaviour
     void Awake()
     {
         parent = transform.parent;
-        Debug.Log(transform.parent.name);
     }
     void OnEnable()
     {
@@ -46,5 +45,10 @@ public class BaseBullet : MonoBehaviour
         float n = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
         if (n < 0) n += 360;
         return n;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.name);
     }
 }
